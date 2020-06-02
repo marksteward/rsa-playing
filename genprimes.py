@@ -17,8 +17,7 @@ def test_p_q(p, q, e=0x10001, msg='Test'):
   c = pow(m, e, n)
   res = pow(c, d, n)
 
-  m2 = long_to_bytes(res)
-  # Don't decode in case it's failed
+  m2 = long_to_bytes(res).decode('utf-8')
 
   print(f"""
   p = {p:x}
@@ -100,7 +99,7 @@ for k, pqs in results.items():
         print(f"{p:x}, {q:x} failed: {e}")
 
     print()
-    print(f"middle = {k:x}")
+    print(f"middle = 0x{k:x}")
     suffixes = ', '.join([hex((p * q) & 0xffffffff) for p, q in pqs])
     print(f"suffixes = [{suffixes}]")
     break
